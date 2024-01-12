@@ -5,6 +5,6 @@ from . import views
 app_name = "poxidb"
 
 urlpatterns = [
-    path("test_view/", views.test_view, name = "test_view")
+    path("poxidb/", views.poxidb, name = "poxidb")
     
 ]
