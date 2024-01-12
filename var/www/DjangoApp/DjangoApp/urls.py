@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("DjangoApp/", include("DjangoApp.urls"))
+    path("poxidb/", include("poxidb.urls"))
 ]

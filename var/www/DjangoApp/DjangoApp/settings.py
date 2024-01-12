@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-8(98!*^++e)78y098hun6a34h5#(*!j4(3zes%z=zrt3p(1$7c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.105.8.37']
+ALLOWED_HOSTS = ['172.105.8.37', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'poxidb.apps.PoxidbConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

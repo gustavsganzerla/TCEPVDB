@@ -1,4 +1,10 @@
-from django.http import HttpResponse
+from django.urls import path
+from . import views
 
-def test_view(request):
-    return HttpResponse("hi")
+
+app_name = "poxidb"
+
+urlpatterns = [
+    path("test_view/", views.test_view, name = "test_view")
+    
+]
