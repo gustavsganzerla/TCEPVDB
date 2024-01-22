@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .small-text {
+        font-size: 12px;  /* Adjust the font size as needed */
+        max-width: 750px; /* Adjust the maximum width as needed */
+        word-wrap: break-word;
+      }
+  </style>
+
+
+
+{%for seq in antigen%}
+<p>Protein Sequence of the antigen <b>{{seq.description}}</b> </p>
+<p class="small-text">{{seq.protein}}</p>
+
+<p>Download Epitopes <a href="{% url 'poxidb:download_individual_epitopes' description=seq.description %}" title="View"><i class="fas fa-download"></i></a> </p>
+{%endfor%}
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Epitope Number</th>
+            <th>Epitope</th>
+            <th>Epitope Prediction Score</th>
+            <th>Epitope Start</th>
+            <th>Epitope End</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in epitopes%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{item.sequence}}</td>
+            <td>{{item.epitope_score}}</td>
+            <td>{{item.start}}</td>
+            <td>{{item.end}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+
+{% endblock %}

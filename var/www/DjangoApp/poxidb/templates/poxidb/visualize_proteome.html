@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Proteome for: <u>{{organism}}</u></h2>
+<br>
+<p>Total proteins = {{n_proteins}}</p>
+<p class 'action-button'>
+  <a href="{% url 'poxidb:download_proteome' organism=organism %}" title="View"><i class="fas fa-download"></i></a>
+  Download Proteome
+</p>
+
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .small-text {
+        font-size: 12px;  /* Adjust the font size as needed */
+        max-width: 750px; /* Adjust the maximum width as needed */
+        word-wrap: break-word;
+      }
+  </style>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Antigenicity Score</th>
+        <th>Protein Sequence </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in proteome %}
+        <tr>
+          <td>{{item.description}}</td>
+          <td>{{item.antigen_score}}</td>
+          <td class="small-text">{{item.protein}}</td>
+          
+        </tr>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<!-- Scroll to Top Button -->
+<button onclick="scrollToTop()" style="display: block; position: fixed; bottom: 20px; right: 20px;" class="btn btn-secondary">Scroll to Top</button>
+
+<script>
+  function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+
+{% endblock%}

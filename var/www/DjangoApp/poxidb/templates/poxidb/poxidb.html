@@ -58,18 +58,18 @@
                 <td>{{item.organism}}</td>
                 <td>{{item.protein_count}}</td>
                 <td class="action-buttons">
-                    <a><i class="fas fa-eye"></i></a>
-                    <a><i class="fas fa-download"></i></a>
+                    <a href="{% url 'poxidb:visualize_proteome' organism=item.organism %}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_proteome' organism=item.organism %}" title="View"><i class="fas fa-download"></i></a>
                 </td>
                 <td>{{item.antigen_count}}</td>
                 <td class="action-buttons">
-                    <a title="View"><i class="fas fa-eye"></i></a>
-                    <a ><i class="fas fa-download"></i></a>
+                    <a href="{% url 'poxidb:visualize_antigens' organism=item.organism %}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_antigens' organism=item.organism %}" title="View"><i class="fas fa-download"></i></a>
                 </td>
                 <td>{{item.epitope_count}}</td>
                 <td class="action-buttons">
-                    <a><i class="fas fa-eye"></i></a>
-                    <a><i class="fas fa-download"></i></a>
+                    <a href="{% url 'poxidb:visualize_epitopes' organism=item.organism %}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_epitopes' organism=item.organism %}" title="View"><i class="fas fa-download"></i></a>
                 </td>
             </tr>
         {% endfor %}

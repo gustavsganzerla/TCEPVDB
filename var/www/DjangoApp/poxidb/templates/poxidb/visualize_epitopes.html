@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+
+
+
+{%block content %}
+  <h2>Epitopes for: <u>{{organism}}</u></h2>
+  <br>
+  <p>Total epitopes = {{n_epitopes}}</p>
+  <p class 'action-button'>
+    <a href="{% url 'poxidb:download_epitopes' organism=organism %}" title="View"><i class="fas fa-download"></i></a>
+    Download Epitopes
+  </p>
+
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    .small-text {
+        font-size: 12px;  /* Adjust the font size as needed */
+        max-width: 750px; /* Adjust the maximum width as needed */
+        word-wrap: break-word;
+      }
+  </style>
+
+  <table>
+    <thead>
+        <tr>
+            <th> Molecular Parent </th>
+            <th> Epitope </th>
+            <th> Prediction Score </th>
+        <tr>
+        </thead>
+    <tbody>
+        {% for item in epitopes %}
+            <tr>
+                <td>
+                    {% ifchanged item.description %}
+                    <a href="{% url 'poxidb:visualize_individual_epitopes' description=item.description%}">{{item.description}}</a></td>
+                    {% endifchanged %}
+                </td>
+                <td>{{ item.sequence }}</td>
+                <td>{{ item.epitope_score }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</table>
+
+
+
+
+
+
+
+<!-- Scroll to Top Button -->
+<button onclick="scrollToTop()" style="display: block; position: fixed; bottom: 20px; right: 20px;" class="btn btn-secondary">Scroll to Top</button>
+
+<script>
+  function scrollToTop() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+
+{% endblock%}
