@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Organisms</title>
+</head>
+<body>
+    <h1>T Cell Epitopes Poxviruses Database</h1>
+    <form id="searchForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.getElementById("searchForm");
+            var field1 = form.querySelector("input[name='query_organism']");
+            var field2 = form.querySelector("input[name='query_antigen']");
+
+            function disableField(field) {
+                field.disabled = true;
+            }
+
+            function enableField(field) {
+                field.disabled = false;
+            }
+
+            // Initially, both fields are enabled
+            enableField(field1);
+            enableField(field2);
+
+            field1.addEventListener("input", function() {
+                if (field1.value.trim() !== "") {
+                    disableField(field2);
+                } else {
+                    enableField(field2);
+                }
+            });
+
+            field2.addEventListener("input", function() {
+                if (field2.value.trim() !== "") {
+                    disableField(field1);
+                } else {
+                    enableField(field1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

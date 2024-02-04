@@ -1,0 +1,85 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .action-buttons a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+</style>
+
+<h2>Available Organisms</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th></th> 
+            <th colspan="2">Proteome Level</th>
+            <th colspan="2">Antigen Level</th>
+            <th colspan="2">Epitope Level</th>
+        </tr>
+        <tr>
+            <th>Proteome</th>
+            <th>Number of Proteins</th>
+            <th></th>
+            <th>Number of Predicted Antigens</th>
+            <th></th>
+            <th>Number of Predicted Epitopes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in organism_data %}
+            <tr>
+                <td>{{item.organism}}</td>
+                <td>{{item.protein_count}}</td>
+                <td class="action-buttons">
+                    <a href="{% url 'poxidb:visualize_proteome' organism=item.organism %}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_proteome' organism=item.organism %}" title="View"><i class="fas fa-download"></i></a>
+                </td>
+                <td>{{item.antigen_count}}</td>
+                <td class="action-buttons">
+                    {%with modified_organism=item.organism|add:'_organism'%}
+                    <a href="{% url 'poxidb:visualize_antigens' query=modified_organism%}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_antigens' query=modified_organism%}" title="View"><i class="fas fa-download"></i></a>
+                    {% endwith %}
+                </td>
+                <td>{{item.epitope_count}}</td>
+
+                <td class="action-buttons">
+                    {%with modified_organism=item.organism|add:'_organism'%}
+                    <a href="{% url 'poxidb:visualize_epitopes' query=modified_organism%}" title="View"><i class="fas fa-eye"></i></a>
+                    <a href="{% url 'poxidb:download_epitopes' query=modified_organism%}" title="View"><i class="fas fa-download"></i></a>
+                    {% endwith %}
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
