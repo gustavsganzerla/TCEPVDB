@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from . import models
 
 from collections import Counter
@@ -241,6 +241,7 @@ def visualize_epitopes(request, query):
 
 def download_epitopes(request, query):
 
+
     ###execute the query here based on what was searched
     if "_organism" in query:
         epitopes = models.Epitope.objects.filter(organism__contains = query.replace("_organism", ""))
@@ -270,3 +271,4 @@ def download_epitopes(request, query):
     else:
         # Handle the case where there is no data
         return HttpResponse("No data available.")
+    
