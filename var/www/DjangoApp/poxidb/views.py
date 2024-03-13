@@ -273,5 +273,5 @@ def download_epitopes(request, query):
         return HttpResponse("No data available.")
     
 ####funding
-def funding(request):
+def fund(request):
     return render(request, "poxidb/funding.html")

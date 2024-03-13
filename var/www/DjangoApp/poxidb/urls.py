@@ -15,5 +15,5 @@ urlpatterns = [
     path("download_individual_epitopes/<path:description>", views.download_individual_epitopes, name = "download_individual_epitopes"),
     path("visualize_epitopes/<str:query>", views.visualize_epitopes, name = "visualize_epitopes"),
     path("download_epitopes/<str:query>", views.download_epitopes, name = "download_epitopes"),
-    path("funding/", views.funding, name = "funding")
+    path("fund/", views.fund, name = "fund")
 ]
