@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 
 {% block content %}
 <html lang="en">
 
 <style>
-    .statistics {
-      border: 1px solid black;
-      padding: 10px;
-      width: 300px;
-      height: 200px;
+    .form-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: fit-content; /* Adjust width as needed */
+        margin: auto;
     }
+
+    .form-field {
+        margin-bottom: 10px;
+    }
+
+    .form-label {
+        display: inline-block;
+        width: 150px; /* Adjust width as needed */
+    }
+
   </style>
 <head>
     <meta charset="UTF-8">
@@ -20,18 +30,34 @@
 </head>
 <body>
     <h1>T Cell Epitopes Poxviruses Database</h1>
-    <form id="searchForm" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
     <br>
-    <div class=statistics>
-    <p><i class="fa-solid fa-chart-simple"></i><i> Statistics</i></p>
-    <p><b>Supported organisms:</b> 37</p>
-    <p><b>Predicted Antigens:</b> 3,966</p>
-    <p><b>Predicted Epitopes:</b> 54,291</p>
+
+    <div style="position: relative;">
+        <form id="searchForm" method="POST" enctype="multipart/form-data" style="float: left;">
+            {% csrf_token %}
+            
+            <div class="form-field">
+                <label for="id_field1" class="form-label">Query Organism: </label>
+                {{form.query_organism}}
+            </div>
+
+            <div class="form-field">
+                <label for="id_field2" class="form-label">Query Antigen: </label>
+                {{form.query_antigen}}
+            </div>
+
+            <div class="form-field">
+                <label for="id_field3" class="form-label">Search Type: </label>
+                {{form.search_type}}
+            </div>
+            <button type="submit">Search</button>
+        </form>
+    
+        <img src="{% static 'images/TCEVPDB.png' %}" alt="Description of the image" style="position: absolute; top: 0; right: 0; width: 500px; height: auto;">
     </div>
+
+
+    
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
