@@ -8,6 +8,9 @@
   <a href="{% url 'poxidb:download_proteome' organism=organism %}" title="View"><i class="fas fa-download"></i></a>
   Download Proteome
 </p>
+<a href="{% url 'poxidb:characterize_proteome' organism=organism %}">
+  <button class="btn btn-primary">Proteome Characterization</button>
+</a>
 
 <style>
     table {

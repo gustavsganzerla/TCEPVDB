@@ -31,6 +31,10 @@
 <p class="small-text">{{seq.protein}}</p>
 
 <p>Download Epitopes <a href="{% url 'poxidb:download_individual_epitopes' description=seq.description %}" title="View"><i class="fas fa-download"></i></a> </p>
+
+<a href="{% url 'poxidb:characterize_individual_epitopes' description=seq.description %}">
+  <button class="btn btn-primary">Epitopes Characterization</button>
+</a>
 {%endfor%}
 
 

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 0;  /* Set left margin to 0 */
+        }
+    
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    
+        th {
+            background-color: #f2f2f2;
+        }
+        .small-text {
+            font-size: 12px;  /* Adjust the font size as needed */
+            max-width: 750px; /* Adjust the maximum width as needed */
+            word-wrap: break-word;
+            text-align: left;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+    
+        /* Center text in the first column */
+        th:first-child, td:first-child {
+            text-align: center;
+        }
+
+        #scrollToTop {
+            display: none; /* Hide the button by default */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+    </style>
+    </head>
+
+  
+    <body>
+        <h1>Results</h1>
+        {% if csv_content%}
+        <a href="{% url 'poxidb:download_characterization'%}">
+            <button class="btn btn-primary">Download Characterization</button>
+          </a>
+    <br>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>Sequence</th>
+                <th>Length</th>
+                <th>GRAVY</th>
+                <th>Aliphatic Index</th>
+                <th>Instability Index
+                <th>Stability</th>
+                <th>Molecular Weight</th>
+                <th>Aromaticity</th>
+                <th>Isoelectric Point</th>
+                <th>Charge at pH 7</th>
+                <th>Secondary Structure Fraction (Helix; Turn; Sheet)</th>
+                <th>Molar Extinction Coefficient (Reduced; Oxidized)</th>
+                <th>Atomic Composition</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in output %}
+            <tr>
+                <td class="small-text">{{item.sequence}}</td>
+                <td>{{item.length}}</td>
+                <td>{{item.gravy}}</td>
+                <td>{{item.aliphatic_index}}</td>
+                <td>{{item.instability_index}}</td>
+                <td>{{item.stability}}</td>
+                <td>{{item.molecular_weight}}</td>
+                <td>{{item.aromaticity}}</td>
+                <td>{{item.isoelectric_point}}</td>
+                <td>{{item.charge_at_pH}}</td>
+                <td>
+                    <ul>
+                        {% for value in item.secondary_structure_fraction %}
+                        <li>{{value}}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        {% for value in item.molar_extinction_coefficient %}
+                        <li>{{value}}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    C<sub>{{ item.atomic_composition.0 }}</sub>
+                    H<sub>{{ item.atomic_composition.1 }}</sub>
+                    O<sub>{{ item.atomic_composition.2 }}</sub>
+                    N<sub>{{ item.atomic_composition.3 }}</sub>
+                    S<sub>{{ item.atomic_composition.4 }}</sub>
+                </td>
+    
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button to scroll to the top -->
+    <button id="scrollToTop" onclick="scrollToTop()">Back to Top</button>
+
+    <script>
+        // Show the button when the user scrolls down 20px from the top of the document
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            var button = document.getElementById("scrollToTop");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        }
+
+        // Scroll to the top of the document when the button is clicked
+        function scrollToTop() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+        }
+    </script>
+
+
+    </body>
+    </html>
+    
+    {% endblock %}
+    
+
+    

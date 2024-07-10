@@ -8,6 +8,12 @@
   <br>
   <p>Total epitopes = {{n_epitopes}}</p>
   <p>Download Epitopes <a href="{% url 'poxidb:download_epitopes' query=download_query %}" title="View"><i class="fas fa-download"></i></a> </p>
+  <br>
+  
+  <a href="{% url 'poxidb:characterize_epitopes' query=download_query %}">
+    <button class="btn btn-primary">Epitope Characterization</button>
+</a>
+  
   
 
 <style>

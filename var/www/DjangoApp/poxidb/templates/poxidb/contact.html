@@ -1,0 +1,46 @@
+{% extends 'base.html'%}
+{%block content%}
+<style>
+    .form-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: fit-content; /* Adjust width as needed */
+        margin: auto;
+    }
+
+    .form-field {
+        margin-bottom: 10px;
+    }
+
+    .form-label {
+        display: inline-block;
+        width: 150px; /* Adjust width as needed */
+    }
+</style>
+
+
+
+<div style="position: relative;">
+    <form id="contactForm" method="POST" enctype="multipart/form-data" style="float: left;">
+        {% csrf_token %}
+        
+        <div class="form-field">
+            <label for="id_field1" class="form-label">Subject </label>
+            {{form.subject}}
+        </div>
+
+        <div class="form-field">
+            <label for="id_field2" class="form-label">Email </label>
+            {{form.email}}
+        </div>
+
+        <div class="form-field">
+            <label for="id_field3" class="form-label">Message</label>
+            {{form.message}}
+        </div>
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+
+{%endblock%}

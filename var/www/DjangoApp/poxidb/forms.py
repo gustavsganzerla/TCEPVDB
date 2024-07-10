@@ -12,3 +12,12 @@ class SearchForm(forms.Form):
         widget=forms.RadioSelect,
         required=True
     )
+
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(label = "Subject of your message", required=True)
+    email = forms.EmailField(label="Your email address", required=True)
+    message = forms.CharField(widget=forms.Textarea(attrs={"rows":10, 
+                                                                "cols":40,
+                                                                "placeholder":"Type your message here"}),
+                                                                required=True)
