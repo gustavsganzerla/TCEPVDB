@@ -1,4 +1,6 @@
 from django import forms
+from django_recaptcha.fields import ReCaptchaField
+
 
 class SearchForm(forms.Form):
     query_organism = forms.CharField(label = 'Search Organism', required=False)
@@ -21,3 +23,4 @@ class ContactForm(forms.Form):
                                                                 "cols":40,
                                                                 "placeholder":"Type your message here"}),
                                                                 required=True)
+    captcha = ReCaptchaField()
